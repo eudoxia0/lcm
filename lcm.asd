@@ -11,6 +11,7 @@
                 :serial t
                 :components
                 ((:file "package")
+                 (:file "secrets")
                  (:file "cli"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
   :long-description
