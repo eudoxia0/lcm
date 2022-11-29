@@ -14,6 +14,7 @@
                  (:file "components")
                  (:file "secrets")
                  (:file "config")
+                 (:file "state")
                  (:file "registry")
                  (:file "cli")
                  (:file "main"))))
