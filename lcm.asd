@@ -14,6 +14,7 @@
                  (:file "components")
                  (:file "secrets")
                  (:file "config")
+                 (:file "registry")
                  (:file "cli")
                  (:file "main"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
