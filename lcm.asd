@@ -10,7 +10,8 @@
   :components ((:module "src"
                 :serial t
                 :components
-                ((:file "package"))))
+                ((:file "package")
+                 (:file "cli"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
   :long-description
   #.(uiop:read-file-string
