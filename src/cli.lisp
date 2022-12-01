@@ -32,7 +32,10 @@
   (:documentation "Command to apply a configuration."))
 
 (defclass unapply-command (command)
-  ()
+  ((files :reader command-files
+          :initarg :files
+          :type list
+          :documentation "The list of files to load in order."))
   (:documentation "Command to unapply the current configuration."))
 
 ;;;; Command execution.
@@ -57,7 +60,7 @@
   (format t "Commands:~%")
   (format t "  get                       Get the name of the current configuration.")
   (format t "  apply <name> <file...>    Apply a configuration~%")
-  (format t "  unapply                   Unapply the current configuration~%")
+  (format t "  unapply <file...>         Unapply the current configuration~%")
   (format t "  help                      Print this text~%")
   (format t "  version                   Show the current version~%"))
 
@@ -86,7 +89,8 @@
                                             (error "Name is not a symbol.")))
                                 :files files)))
               ((string= first "unapply")
-               (make-instance 'unapply-command))
+               (make-instance 'unapply-command
+                              :files (rest args)))
               ((string= first "help")
                (make-instance 'help-command))
               ((string= first "version")
