@@ -40,6 +40,15 @@
 (defgeneric execute (command)
   (:documentation "Execute a command."))
 
+(defmethod execute ((command get-command))
+  (format t "~A~%" (load-state)))
+
+(defmethod execute ((command apply-command))
+  'wip)
+
+(defmethod execute ((command unapply-command))
+  'wip)
+
 (defmethod execute ((command help-command))
   (declare (ignore command))
   (format t "lcm~%~%")
@@ -71,7 +80,7 @@
                (destructuring-bind (name &rest files)
                    (rest args)
                  (make-instance 'apply-command
-                                :name (let ((name (read name)))
+                                :name (let ((name (read-from-string name)))
                                         (if (symbolp name)
                                             name
                                             (error "Name is not a symbol.")))
@@ -81,6 +90,6 @@
               ((string= first "help")
                (make-instance 'help-command))
               ((string= first "version")
-               (make-instance' 'version-command))
+               (make-instance 'version-command))
               (t
                (make-instance 'help-command))))))
