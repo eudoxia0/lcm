@@ -13,5 +13,8 @@ jobs:
       - name: Install SBCL
         run: sudo apt-get update && sudo apt-get install sbcl
 
+      - name: Tell ASDF where to find the project
+        run: printf "`pwd`"
+
       - name: Build
         run: make
