@@ -1,5 +1,6 @@
 lcm: lcm.asd src/*.lisp
 	sbcl --noinform \
+		 --eval "(require 'asdf)" \
          --eval "(asdf:load-system :lcm)" \
 	     --eval "(sb-ext:save-lisp-and-die #p\"lcm\" :toplevel #'lcm:entrypoint :executable t :purify t)"
 
