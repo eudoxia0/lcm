@@ -16,20 +16,21 @@
   (:documentation "Is this component applied? This is used to ensure we don't do
   work unnecessarily.")
 
-  (:method ((component component))
-    "Default implementation: assume the component is not applied."))
+  (:method ((component component) vault)
+    "Default implementation: assume the component is not applied."
+    nil))
 
 (defgeneric component-apply (component vault)
   (:documentation "Apply a component. Return T on success.")
 
-  (:method ((component component))
+  (:method ((component component) vault)
     "Default implementation: do nothing."
     t))
 
 (defgeneric component-unapply (component vault)
   (:documentation "Unapply a component. Return T on success.")
 
-  (:method ((component component))
+  (:method ((component component) vault)
     "Default implementation: do nothing."
     t))
 
