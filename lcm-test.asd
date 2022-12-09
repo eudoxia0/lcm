@@ -2,7 +2,7 @@
   :author "Fernando Borretti <fernando@borretti.me>"
   :license "GPLv3"
   :depends-on (:lcm
-               :fiveam)
+               :parachute)
   :components ((:module "t"
                 :serial t
                 :components

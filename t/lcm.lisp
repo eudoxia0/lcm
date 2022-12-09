@@ -1,18 +1,25 @@
 (in-package :cl-user)
 (defpackage lcm-test
-  (:use :cl :fiveam)
+  (:use :cl :parachute)
   (:export :run-tests))
 (in-package :lcm-test)
 
-(def-suite tests
-  :description "lcm tests.")
-(in-suite tests)
+(define-suite lcm)
 
-(test simple-test
-  (is
-   (equal 1 1))
-  (is-true
-   (and t t)))
+;;;; Secrets.
+
+(define-test hash-table-keys-tests
+  (let ((table (make-hash-table :test #'equal)))
+    (setf (gethash "A" table) 1
+          (gethash "B" table) 2
+          (gethash "C" table) 3)
+    (let ((keys (sort (lcm::hash-table-keys table) #'string<)))
+      (is = (length keys) 3)
+      (is string= (nth keys 0) "A")
+      (is string= (nth keys 0) "B")
+      (is string= (nth keys 0) "C"))))
+
+;;;; Interface
 
 (defun run-tests ()
-  (run! 'tests))
+  (test 'lcm))
