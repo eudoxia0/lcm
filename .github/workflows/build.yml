@@ -21,3 +21,9 @@ jobs:
 
       - name: Assert binary exists
         run: test -f lcm
+
+      - name: Install
+        run: sudo make install
+
+      - name: Uninstall
+        run: sudo make uninstall
