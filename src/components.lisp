@@ -34,7 +34,7 @@
     "Default implementation: do nothing."
     t))
 
-(defun apply-component-if-needed (component vaukt)
+(defun apply-component-if-needed (component vault)
   "Apply a component if it's not already applied."
   (unless (component-applied-p component vault)
     (component-apply component vault)))
