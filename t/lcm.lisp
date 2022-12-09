@@ -27,6 +27,31 @@
   (let ((cmd (lcm::parse-cli (list "help"))))
     (of-type cmd 'lcm::help-command)))
 
+(define-test version-command
+  :parent lcm
+  (let ((cmd (lcm::parse-cli (list "version"))))
+    (of-type cmd 'lcm::version-command)))
+
+(define-test get-command
+  :parent lcm
+  (let ((cmd (lcm::parse-cli (list "get"))))
+    (of-type cmd 'lcm::get-command)))
+
+(define-test unapply-command
+  :parent lcm
+  (let ((cmd (lcm::parse-cli (list "unapply"))))
+    (of-type cmd 'lcm::get-command)
+    (is equal (command-files cmd) (list))
+    (is equal (command-secrets cmd) nil))
+  (let ((cmd (lcm::parse-cli (list "unapply foo.lisp"))))
+    (of-type cmd 'lcm::get-command)
+    (is equal (command-files cmd) (list "foo.lisp"))
+    (is equal (command-secrets cmd) nil))
+  (let ((cmd (lcm::parse-cli (list "unapply foo.lisp --secrets=derp.sexp"))))
+    (of-type cmd 'lcm::get-command)
+    (is equal (command-files cmd) (list "foo.lisp"))
+    (is equal (command-secrets cmd) "derp.sexp")))
+
 ;;;; Interface
 
 (defun run-tests ()
