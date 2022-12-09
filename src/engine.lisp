@@ -37,8 +37,24 @@
       ;; Write the state.
       (write-state (command-name command)))))
 
+(defun unapply-config (config vault)
+  (loop for component in (configuration-components config) do
+    (unapply-component-if-needed config vault)))
+
 (defmethod execute ((command unapply-command))
-  'wip)
+  ;; Load the Lisp files in order.
+  (loop for pathname in (command-files command) do
+    (load pathname))
+  ;; Load the configuration name from the state.
+  (let ((name (load-state)))
+    ;; Find the configuration with this name.
+    (let ((get-configuration name))
+      ;; Using the secrets template from the configuration, load the secrets file, if any.
+      (let ((vault (load-secrets-if-needed command config)))
+        ;; Unapply the configuration.
+        (unapply-config config vault)
+        ;; Delete the state.
+        (delete-state)))))
 
 (defmethod execute ((command help-command))
   (declare (ignore command))

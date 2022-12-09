@@ -21,3 +21,6 @@
                                 :direction :input)
           (read stream))
         nil)))
+
+(defun delete-state ()
+  (delete-file (path-to-state-file)))
