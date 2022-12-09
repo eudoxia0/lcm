@@ -1,7 +1,7 @@
 (in-package :cl-user)
 (defpackage lcm-test
   (:use :cl :parachute)
-  (:export :run-tests))
+  (:export :run-tests :run-tests-and-die))
 (in-package :lcm-test)
 
 (define-test suite)
@@ -65,3 +65,9 @@
 
 (defun run-tests ()
   (test 'suite))
+
+(defun run-tests-and-die ()
+  (let ((result (run-tests)))
+    (if (eq (status result) :failed)
+        (uiop:quit -1)
+        (uiop:quit 0))))
