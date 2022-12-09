@@ -117,8 +117,8 @@
                      :secrets secrets))))
 
 (defun parse-unapply-args (args)
-  (let ((files (file-args args))
-        (secrets (find-last-secrets args)))
+  (let ((files (file-args (rest args)))
+        (secrets (find-last-secrets (rest args))))
     (make-instance 'unapply-command
                    :files files
                    :secrets secrets)))
