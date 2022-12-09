@@ -14,4 +14,5 @@
            :vault
            :vault-table
            :get-secret
+           :defcomponent
            :entrypoint))
