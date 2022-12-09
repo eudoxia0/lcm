@@ -23,7 +23,7 @@
 (defclass apply-command (command)
   ((name :reader command-name
          :initarg :name
-         :type symbol
+         :type string
          :documentation "The name of the configuration to apply.")
    (files :reader command-files
           :initarg :files
@@ -109,10 +109,7 @@
     (let ((files (file-args args))
           (secrets (find-last-secrets args)))
       (make-instance 'apply-command
-                     :name (let ((name (read-from-string name)))
-                             (if (symbolp name)
-                                 name
-                                 (error "Name is not a symbol.")))
+                     :name name
                      :files files
                      :secrets secrets))))
 

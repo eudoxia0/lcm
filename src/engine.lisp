@@ -34,14 +34,18 @@
   (loop for pathname in (command-files command) do
     (format t "Loading ~A...~%" pathname)
     (load pathname))
-  ;; Find the configuration with the given name.
-  (let ((config (get-configuration (command-name command))))
-    ;; Using the secrets template from the configuration, load the secrets file, if any.
-    (let ((vault (load-secrets-if-needed command config)))
-      ;; Apply the configuration.
-      (apply-config config vault)
-      ;; Write the state.
-      (write-state (command-name command)))))
+  ;; Read the name as a symbol. This has to be done after loading the files, in
+  ;; case the symbol is in a package defined in those files.
+  (let ((name (read-from-string (command-name command))))
+    (check-type name symbol)
+    ;; Find the configuration with the given name.
+    (let ((config (get-configuration name)))
+      ;; Using the secrets template from the configuration, load the secrets file, if any.
+      (let ((vault (load-secrets-if-needed command config)))
+        ;; Apply the configuration.
+        (apply-config config vault)
+        ;; Write the state.
+        (write-state name)))))
 
 (defun unapply-config (config vault)
   (loop for component in (configuration-components config vault) do
