@@ -21,8 +21,8 @@
             (make-instance 'vault :table (make-hash-table :test 'string=))))))
 
 (defun apply-config (config vault)
-  (loop for component in (configuration-components config) do
-    (apply-component-if-needed config vault)))
+  (loop for component in (configuration-components config vault) do
+    (apply-component-if-needed config)))
 
 (defmethod execute ((command apply-command))
   ;; Is a configuration already applied?
@@ -44,8 +44,8 @@
       (write-state (command-name command)))))
 
 (defun unapply-config (config vault)
-  (loop for component in (configuration-components config) do
-    (unapply-component-if-needed config vault)))
+  (loop for component in (configuration-components config vault) do
+    (unapply-component-if-needed config)))
 
 (defmethod execute ((command unapply-command))
   ;; Load the Lisp files in order.

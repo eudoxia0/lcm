@@ -12,40 +12,40 @@
   component installs the package, unapplying it removes the package. To improve
   performance, components can check whether they're already applied."))
 
-(defgeneric component-applied-p (component vault)
+(defgeneric component-applied-p (component)
   (:documentation "Is this component applied? This is used to ensure we don't do
   work unnecessarily.")
 
-  (:method ((component component) vault)
+  (:method ((component component))
     "Default implementation: assume the component is not applied."
     nil))
 
-(defgeneric component-apply (component vault)
+(defgeneric component-apply (component)
   (:documentation "Apply a component. Return T on success.")
 
-  (:method ((component component) vault)
+  (:method ((component component))
     "Default implementation: do nothing."
     t))
 
-(defgeneric component-unapply (component vault)
+(defgeneric component-unapply (component)
   (:documentation "Unapply a component. Return T on success.")
 
-  (:method ((component component) vault)
+  (:method ((component component))
     "Default implementation: do nothing."
     t))
 
-(defun apply-component-if-needed (component vault)
+(defun apply-component-if-needed (component)
   "Apply a component if it's not already applied."
-  (if (component-applied-p component vault)
+  (if (component-applied-p component)
       (format t "  [ SKIP] ~A~%" (component-title component))
       (progn
         (format t "  [APPLY] ~A~%" (component-title component))
-        (component-apply component vault))))
+        (component-apply component))))
 
-(defun unapply-component-if-needed (component vault)
+(defun unapply-component-if-needed (component)
   "Unapply a component if it's already applied."
-  (if (component-applied-p component vault)
+  (if (component-applied-p component)
       (progn
         (format t "  [UNAPPLY] ~A~%" (component-title component))
-        (component-unapply component vault))
+        (component-unapply component))
       (format t "  [   SKIP] ~A~%" (component-title component))))

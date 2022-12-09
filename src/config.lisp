@@ -11,5 +11,5 @@
                      :documentation "The secrets this configuration requires."))
   (:documentation "A system configuration."))
 
-(defgeneric configuration-components (configuration)
-  (:documentation "Given a LOADED-CONFIGURATION, return its component list."))
+(defgeneric configuration-components (configuration vault)
+  (:documentation "Given a configuration and its secrets vault, return its component list."))
