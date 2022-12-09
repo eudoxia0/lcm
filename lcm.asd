@@ -5,7 +5,7 @@
   :version "0.1"
   :homepage "https://github.com/eudoxia0/lcm"
   :bug-tracker "https://github.com/eudoxia0/lcm/issues"
-  :source-control (:git "")
+  :source-control (:git "git@github.com:eudoxia0/lcm.git")
   :depends-on ()
   :components ((:module "src"
                 :serial t
