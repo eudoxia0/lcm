@@ -13,8 +13,8 @@ jobs:
       - name: Install SBCL
         run: sudo apt-get update && sudo apt-get install sbcl
 
-      - name: Tell ASDF where to find the project
-        run: printf "`pwd`"
+      - name: Let ASDF find the project
+        run: mkdir ~/common-lisp; ln -s `pwd` ~/common-lisp/lcm
 
       - name: Build
         run: make
