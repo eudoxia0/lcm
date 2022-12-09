@@ -21,7 +21,7 @@
   (:documentation "Command to get the name of the current configuration."))
 
 (defclass apply-command (command)
-  ((name :reader :command-name
+  ((name :reader command-name
          :initarg :name
          :type symbol
          :documentation "The name of the configuration to apply.")
