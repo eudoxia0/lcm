@@ -36,10 +36,16 @@
 
 (defun apply-component-if-needed (component vault)
   "Apply a component if it's not already applied."
-  (unless (component-applied-p component vault)
-    (component-apply component vault)))
+  (if (component-applied-p component vault)
+      (format t "  [ SKIP] ~A~%" (component-title component))
+      (progn
+        (format t "  [APPLY] ~A~%" (component-title component))
+        (component-apply component vault))))
 
 (defun unapply-component-if-needed (component vault)
   "Unapply a component if it's already applied."
-  (when (component-applied-p component vault)
-    (component-unapply component vault)))
+  (if (component-applied-p component vault)
+      (progn
+        (format t "  [UNAPPLY] ~A~%" (component-title component))
+        (component-unapply component vault))
+      (format t "  [   SKIP] ~A~%" (component-title component))))

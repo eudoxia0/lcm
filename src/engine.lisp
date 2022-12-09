@@ -27,6 +27,7 @@
 (defmethod execute ((command apply-command))
   ;; Load the Lisp files in order.
   (loop for pathname in (command-files command) do
+    (format t "Loading ~A...~%" pathname)
     (load pathname))
   ;; Find the configuration with the given name.
   (let ((config (get-configuration (command-name command))))
@@ -44,6 +45,7 @@
 (defmethod execute ((command unapply-command))
   ;; Load the Lisp files in order.
   (loop for pathname in (command-files command) do
+    (format t "Loading ~A...~%" pathname)
     (load pathname))
   ;; Load the configuration name from the state.
   (let ((name (load-state)))
