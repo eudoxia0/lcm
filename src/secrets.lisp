@@ -14,6 +14,9 @@
           :documentation "The hash table that stores the secrets."))
   (:documentation "A secrets vault maps secret keys to values."))
 
+(defun make-secrets (&rest keys)
+  (make-instance 'secrets-template :keys keys))
+
 (defun get-secret (vault key)
   "Get a secret from a vault by key."
   (gethash key (vault-table vault)))

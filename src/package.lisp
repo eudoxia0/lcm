@@ -11,8 +11,11 @@
            :component-unapply
            :secrets-template
            :secrets-template-keys
+           :make-secrets
            :vault
            :vault-table
            :get-secret
+           :register-configuration
+           :get-configuration
            :defcomponent
            :entrypoint))
