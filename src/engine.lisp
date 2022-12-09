@@ -25,6 +25,11 @@
     (apply-component-if-needed config vault)))
 
 (defmethod execute ((command apply-command))
+  ;; Is a configuration already applied?
+  (let ((state (load-state)))
+    (when state
+      (format t "A configuration is already applied: ~A~%" state)
+      (uiop:quit -1)))
   ;; Load the Lisp files in order.
   (loop for pathname in (command-files command) do
     (format t "Loading ~A...~%" pathname)
