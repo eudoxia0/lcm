@@ -12,33 +12,33 @@
   component installs the package, unapplying it removes the package. To improve
   performance, components can check whether they're already applied."))
 
-(defgeneric component-applied-p (component)
+(defgeneric component-applied-p (component vault)
   (:documentation "Is this component applied? This is used to ensure we don't do
   work unnecessarily.")
 
   (:method ((component component))
     "Default implementation: assume the component is not applied."))
 
-(defgeneric component-apply (component)
+(defgeneric component-apply (component vault)
   (:documentation "Apply a component. Return T on success.")
 
   (:method ((component component))
     "Default implementation: do nothing."
     t))
 
-(defgeneric component-unapply (component)
+(defgeneric component-unapply (component vault)
   (:documentation "Unapply a component. Return T on success.")
 
   (:method ((component component))
     "Default implementation: do nothing."
     t))
 
-(defun apply-component-if-needed (component)
+(defun apply-component-if-needed (component vaukt)
   "Apply a component if it's not already applied."
-  (unless (component-applied-p component)
-    (component-apply component)))
+  (unless (component-applied-p component vault)
+    (component-apply component vault)))
 
-(defun unapply-component-if-needed (component)
+(defun unapply-component-if-needed (component vault)
   "Unapply a component if it's already applied."
-  (when (component-applied-p component)
-    (component-unapply component)))
+  (when (component-applied-p component vault)
+    (component-unapply component vault)))

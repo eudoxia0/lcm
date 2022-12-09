@@ -20,8 +20,9 @@
             ;; No secrets required, none provided.
             (make-instance 'vault :table (make-hash-table :test #'string=))))))
 
-(defun apply-loaded-config (config)
-  'wip)
+(defun apply-loaded-config (config vault)
+  (loop for component in (configuration-components config) do
+    (apply-component-if-needed config vault)))
 
 (defmethod execute ((command apply-command))
   ;; Load the Lisp files in order.
@@ -31,12 +32,7 @@
   (let ((config (get-configuration (command-name command))))
     ;; Using the secrets template from the configuration, load the secrets file, if any.
     (let ((vault (load-secrets-if-needed command config)))
-      ;; Make the loaded-configuration.
-      (let ((loaded-config (make-instance 'loaded-configuration
-                                          :name (configuration-name config)
-                                          :secrets-template (configuration-secrets-template config)
-                                          :vault vault)))
-        (apply-loaded-config loaded-config)))))
+      (apply-loaded-config config vault)))))
 
 (defmethod execute ((command unapply-command))
   'wip)
