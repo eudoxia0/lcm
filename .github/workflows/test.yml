@@ -19,5 +19,8 @@ jobs:
       - name: Install Quicklisp
         run: sbcl  --noinform --non-interactive --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --eval '(ql-util:without-prompting (ql:add-to-init-file))' --quit
 
+      - name: Let ASDF find the project
+        run: mkdir ~/common-lisp; ln -s `pwd` ~/common-lisp/lcm
+
       - name: Run tests
         run: sbcl --noinform --non-interactive --eval "(ql:quickload :lcm-test)" --eval "(lcm-test:run-tests)" --quit
