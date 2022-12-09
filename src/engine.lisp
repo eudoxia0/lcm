@@ -48,7 +48,7 @@
   ;; Load the configuration name from the state.
   (let ((name (load-state)))
     ;; Find the configuration with this name.
-    (let ((get-configuration name))
+    (let ((config (get-configuration name)))
       ;; Using the secrets template from the configuration, load the secrets file, if any.
       (let ((vault (load-secrets-if-needed command config)))
         ;; Unapply the configuration.
