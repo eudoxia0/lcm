@@ -17,6 +17,7 @@
                  (:file "state")
                  (:file "registry")
                  (:file "cli")
+                 (:file "engine")
                  (:file "main"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
   :long-description
