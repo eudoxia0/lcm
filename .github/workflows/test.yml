@@ -17,7 +17,7 @@ jobs:
         run: curl -O https://beta.quicklisp.org/quicklisp.lisp
 
       - name: Install Quicklisp
-        run: sbcl --non-interactive --noinform --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --eval '(ql-util:without-prompting (ql:add-to-init-file))' --quit
+        run: sbcl  --noinform --non-interactive--load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --eval '(ql-util:without-prompting (ql:add-to-init-file))' --quit
 
       - name: Run tests
-        run: sbcl --non-interactive --noinform --eval "(ql:quickload :lcm-test)" --eval "(lcm-test:run-tests)" --quit
+        run: sbcl --noinform --non-interactive --eval "(ql:quickload :lcm-test)" --eval "(lcm-test:run-tests)" --quit
