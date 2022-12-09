@@ -59,14 +59,15 @@
   (starts-with-p string "--secrets="))
 
 (defun secrets-value (string)
-  (starts-with-p string "--secrets="))
+  (subseq string (length "--secrets=")))
 
 (defun find-last-secrets (strings)
   "Find the value of the `--secrets=` flag in the argument list. NIL otherwise. If there are multiple flags, return the last one."
   (let ((result nil))
     (dolist (string strings result)
       (when (secretsp string)
-        (setq result (secrets-value string))))))
+        (setq result (secrets-value string))))
+    result))
 
 (defun file-args (strings)
   "Return a list of all strings in the list of strings STRINGS that don't satisfy the 'secretsp' predicate."

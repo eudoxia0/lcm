@@ -39,25 +39,25 @@
 
 (define-test apply-command
   :parent suite
-  (let ((cmd (lcm::parse-cli (list "apply bar foo.lisp"))))
-    (of-type 'lcm::get-command cmd)
+  (let ((cmd (lcm::parse-cli (list "apply" "bar" "foo.lisp"))))
+    (of-type 'lcm::apply-command cmd)
     (is eq (lcm::command-name cmd) 'bar)
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) nil))
-  (let ((cmd (lcm::parse-cli (list "apply bar foo.lisp --secrets=derp.sexp"))))
-    (of-type 'lcm::get-command cmd)
+  (let ((cmd (lcm::parse-cli (list "apply" "bar" "foo.lisp" "--secrets=derp.sexp"))))
+    (of-type 'lcm::apply-command cmd)
     (is eq (lcm::command-name cmd) 'bar)
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) "derp.sexp")))
 
 (define-test unapply-command
   :parent suite
-  (let ((cmd (lcm::parse-cli (list "unapply foo.lisp"))))
-    (of-type 'lcm::get-command cmd)
+  (let ((cmd (lcm::parse-cli (list "unapply" "foo.lisp"))))
+    (of-type 'lcm::unapply-command cmd)
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) nil))
-  (let ((cmd (lcm::parse-cli (list "unapply foo.lisp --secrets=derp.sexp"))))
-    (of-type 'lcm::get-command cmd)
+  (let ((cmd (lcm::parse-cli (list "unapply" "foo.lisp" "--secrets=derp.sexp"))))
+    (of-type 'lcm::unapply-command cmd)
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) "derp.sexp")))
 
