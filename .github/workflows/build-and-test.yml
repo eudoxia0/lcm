@@ -1,8 +1,8 @@
-name: Test
+name: Build and test
 on:
   - push
 jobs:
-  test:
+  build:
     strategy:
       fail-fast: true
     runs-on: ubuntu-latest
@@ -24,3 +24,15 @@ jobs:
 
       - name: Run tests
         run: sbcl --noinform --non-interactive --eval "(ql:quickload :lcm-test)" --eval "(lcm-test:run-tests-and-die)" --quit
+
+      - name: Build
+        run: make
+
+      - name: Assert binary exists
+        run: test -f lcm
+
+      - name: Install
+        run: sudo make install
+
+      - name: Uninstall
+        run: sudo make uninstall
