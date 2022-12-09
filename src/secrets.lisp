@@ -19,7 +19,8 @@
   (gethash key (vault-table vault)))
 
 (defun hash-table-keys (table)
-  (maphash #'(lambda (key value) (declare (ignore value)) key) table))
+  (loop for key being the hash-key of table using (hash-value value)
+    collect key))
 
 (defun alist-keys (alist)
   "Iterate over an alist, returning the list of keys."

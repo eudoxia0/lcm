@@ -10,7 +10,7 @@
 
 (define-test hash-table-keys-tests
   :parent suite
-  (let ((table (make-hash-table :test #'equal)))
+  (let ((table (make-hash-table :test 'equal)))
     (setf (gethash "A" table) 1
           (gethash "B" table) 2
           (gethash "C" table) 3)
