@@ -4,3 +4,6 @@
 
 (defun register-configuration (config)
   (setf (gethash (configuration-name config) *config-registry*) config))
+
+(defun get-configuration (name)
+  (gethash name *config-registry*))
