@@ -6,8 +6,37 @@
 (defmethod execute ((command get-command))
   (format t "~A~%" (load-state)))
 
-(defmethod execute ((command apply-command))
+(defun load-secrets-if-needed (command config)
+  (let ((template (configuration-secrets-template config)))
+    (if (> (secrets-template-keys template) 0)
+        (if (command-secrets command)
+            ;; Secrets required, and provided.
+            (load-secrets template (command-secrets command))
+            ;; Secrets required, not provided.
+            (error "This configuration requires secrets, but the --secrets flag was not provided."))
+        (if (command-secrets command)
+            ;; No secrets required, but a path was provided.
+            (error "This configuration doesn't require secrets, but a value was provided for --secrets.")
+            ;; No secrets required, none provided.
+            (make-instance 'vault :table (make-hash-table :test #'string=))))))
+
+(defun apply-loaded-config (config)
   'wip)
+
+(defmethod execute ((command apply-command))
+  ;; Load the Lisp files in order.
+  (loop for pathname in (command-files command) do
+    (load pathname))
+  ;; Find the configuration with the given name.
+  (let ((config (get-configuration (command-name command))))
+    ;; Using the secrets template from the configuration, load the secrets file, if any.
+    (let ((vault (load-secrets-if-needed command config)))
+      ;; Make the loaded-configuration.
+      (let ((loaded-config (make-instance 'loaded-configuration
+                                          :name (configuration-name config)
+                                          :secrets-template (configuration-secrets-template config)
+                                          :vault vault)))
+        (apply-loaded-config loaded-config)))))
 
 (defmethod execute ((command unapply-command))
   'wip)
