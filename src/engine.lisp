@@ -32,7 +32,10 @@
   (let ((config (get-configuration (command-name command))))
     ;; Using the secrets template from the configuration, load the secrets file, if any.
     (let ((vault (load-secrets-if-needed command config)))
-      (apply-loaded-config config vault))))
+      ;; Apply the configuration.
+      (apply-loaded-config config vault)
+      ;; Write the state.
+      (write-state (command-name command)))))
 
 (defmethod execute ((command unapply-command))
   'wip)
