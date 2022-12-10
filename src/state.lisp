@@ -19,7 +19,7 @@
     (if (probe-file path)
         (with-open-file (stream path
                                 :direction :input)
-          (read stream))
+          (read-line stream nil))
         nil)))
 
 (defun delete-state ()
