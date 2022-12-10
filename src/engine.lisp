@@ -53,6 +53,10 @@
     (unapply-component-if-needed component)))
 
 (defmethod execute ((command unapply-command))
+  ;; If there's no config, abort.
+  (unless (load-state)
+    (format t "No configuration is applied.")
+    (uiop:quit -1))
   ;; Load the Lisp files in order.
   (loop for pathname in (command-files command) do
     (format t "Loading ~A...~%" pathname)
