@@ -8,7 +8,7 @@
 
 (defun load-secrets-if-needed (command config)
   (let ((template (configuration-secrets-template config)))
-    (if (> (secrets-template-keys template) 0)
+    (if (> (length (secrets-template-keys template)) 0)
         (if (command-secrets command)
             ;; Secrets required, and provided.
             (load-secrets template (command-secrets command))
