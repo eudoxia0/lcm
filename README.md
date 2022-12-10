@@ -2,7 +2,8 @@
 
 **LCM** is a tool for managing your system's configuration in Common Lisp. Think
 of it as Ansible, for your localhost, with Common Lisp instead of executable
-YAML.
+YAML. I wrote this because I needed a tool to provision my computers that lets
+me change from one configuration to another painlessly.
 
 Features:
 
