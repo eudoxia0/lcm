@@ -14,25 +14,13 @@
 
 (defgeneric component-applied-p (component)
   (:documentation "Is this component applied? This is used to ensure we don't do
-  work unnecessarily.")
-
-  (:method ((component component))
-    "Default implementation: assume the component is not applied."
-    nil))
+  work unnecessarily."))
 
 (defgeneric component-apply (component)
-  (:documentation "Apply a component. Return T on success.")
-
-  (:method ((component component))
-    "Default implementation: do nothing."
-    t))
+  (:documentation "Apply a component. Return T on success."))
 
 (defgeneric component-unapply (component)
-  (:documentation "Unapply a component. Return T on success.")
-
-  (:method ((component component))
-    "Default implementation: do nothing."
-    t))
+  (:documentation "Unapply a component. Return T on success."))
 
 (defun apply-component-if-needed (component)
   "Apply a component if it's not already applied."
