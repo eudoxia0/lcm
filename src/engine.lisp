@@ -22,7 +22,7 @@
 
 (defun apply-config (config vault)
   (loop for component in (configuration-components config vault) do
-    (apply-component-if-needed config)))
+    (apply-component-if-needed component)))
 
 (defmethod execute ((command apply-command))
   ;; Is a configuration already applied?
@@ -50,7 +50,7 @@
 
 (defun unapply-config (config vault)
   (loop for component in (configuration-components config vault) do
-    (unapply-component-if-needed config)))
+    (unapply-component-if-needed component)))
 
 (defmethod execute ((command unapply-command))
   ;; Load the Lisp files in order.
