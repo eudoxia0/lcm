@@ -41,12 +41,12 @@
   :parent suite
   (let ((cmd (lcm::parse-cli (list "apply" "bar" "foo.lisp"))))
     (of-type 'lcm::apply-command cmd)
-    (is eq (lcm::command-name cmd) 'bar)
+    (is eq (lcm::command-name cmd) "bar")
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) nil))
   (let ((cmd (lcm::parse-cli (list "apply" "bar" "foo.lisp" "--secrets=derp.sexp"))))
     (of-type 'lcm::apply-command cmd)
-    (is eq (lcm::command-name cmd) 'bar)
+    (is eq (lcm::command-name cmd) "bar")
     (is equal (lcm::command-files cmd) (list "foo.lisp"))
     (is equal (lcm::command-secrets cmd) "derp.sexp")))
 
