@@ -38,6 +38,7 @@
   ;; case the symbol is in a package defined in those files.
   (let ((name (read-from-string (command-name command))))
     (check-type name symbol)
+    (format t "Applying ~A" name)
     ;; Find the configuration with the given name.
     (let ((config (get-configuration name)))
       ;; Using the secrets template from the configuration, load the secrets file, if any.
@@ -57,7 +58,7 @@
     (format t "Loading ~A...~%" pathname)
     (load pathname))
   ;; Load the configuration name from the state.
-  (let ((name (load-state)))
+  (let ((name (read-from-string (load-state))))
     ;; Find the configuration with this name.
     (let ((config (get-configuration name)))
       ;; Using the secrets template from the configuration, load the secrets file, if any.
