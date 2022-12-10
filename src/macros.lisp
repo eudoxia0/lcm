@@ -12,3 +12,18 @@
      (defmethod component-apply ,@apply)
 
      (defmethod component-unapply ,@unapply)))
+
+(defmacro defconfig (name &key secrets components)
+  "Shorthand for defining a system configuration."
+  `(progn
+
+
+     (defclass ,name (configuration)
+       ())
+
+     (defmethod configuration-components ,@components)
+
+     (register-configuration
+      (make-instance ',name
+                     :name name
+                     :secrets-template (make-secrets ,@secrets)))))

@@ -18,4 +18,5 @@
            :register-configuration
            :get-configuration
            :defcomponent
+           :defconfig
            :entrypoint))
