@@ -18,7 +18,7 @@
             ;; No secrets required, but a path was provided.
             (error "This configuration doesn't require secrets, but a value was provided for --secrets.")
             ;; No secrets required, none provided.
-            (make-instance 'vault :table (make-hash-table :test 'string=))))))
+            (make-instance 'vault :table (make-hash-table :test 'equal))))))
 
 (defun apply-config (config vault)
   (loop for component in (configuration-components config vault) do
