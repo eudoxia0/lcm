@@ -55,7 +55,7 @@
 (defmethod execute ((command unapply-command))
   ;; If there's no config, abort.
   (unless (load-state)
-    (format t "No configuration is applied.")
+    (format t "No configuration is applied.~%")
     (uiop:quit -1))
   ;; Load the Lisp files in order.
   (loop for pathname in (command-files command) do
