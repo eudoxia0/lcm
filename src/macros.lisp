@@ -11,4 +11,4 @@
 
      (defmethod component-apply ,@apply)
 
-     (defmethod component-nuapply ,@unapply)))
+     (defmethod component-unapply ,@unapply)))
