@@ -16,8 +16,6 @@
 (defmacro defconfig (name &key secrets components)
   "Shorthand for defining a system configuration."
   `(progn
-
-
      (defclass ,name (configuration)
        ())
 
