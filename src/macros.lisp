@@ -25,5 +25,5 @@
 
      (register-configuration
       (make-instance ',name
-                     :name name
+                     :name ',name
                      :secrets-template (make-secrets ,@secrets)))))
