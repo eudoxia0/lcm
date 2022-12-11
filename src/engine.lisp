@@ -41,6 +41,9 @@
     (format t "Applying ~A~%" name)
     ;; Find the configuration with the given name.
     (let ((config (get-configuration name)))
+      (unless config
+        (format t "No configuration with this name: ~A~%" name)
+        (uiop:quit -1))
       ;; Using the secrets template from the configuration, load the secrets file, if any.
       (let ((vault (load-secrets-if-needed command config)))
         ;; Apply the configuration.
@@ -67,6 +70,9 @@
     (format t "Unapplying ~A~%" name)
     ;; Find the configuration with this name.
     (let ((config (get-configuration name)))
+      (unless config
+        (format t "No configuration with this name: ~A" name)
+        (uiop:quit -1))
       ;; Using the secrets template from the configuration, load the secrets file, if any.
       (let ((vault (load-secrets-if-needed command config)))
         ;; Unapply the configuration.
