@@ -22,6 +22,9 @@ jobs:
       - name: Let ASDF find the project
         run: mkdir ~/common-lisp; ln -s `pwd` ~/common-lisp/lcm
 
+      - name: Install dependencies
+        run: sbcl --noinform --non-interactive --eval "(ql:quickload :file-attributes)" --eval "(lcm-test:run-tests-and-die)" --quit
+
       - name: Run tests
         run: sbcl --noinform --non-interactive --eval "(ql:quickload :lcm-test)" --eval "(lcm-test:run-tests-and-die)" --quit
 
