@@ -19,6 +19,11 @@
                  (:file "cli")
                  (:file "engine")
                  (:file "macros")
+                 (:module "builtin"
+                  :serial t
+                  :components
+                  ((:file "package")
+                   (:file "file")))
                  (:file "main"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
   :long-description
