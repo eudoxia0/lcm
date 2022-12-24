@@ -19,4 +19,5 @@
            :get-configuration
            :defcomponent
            :defconfig
-           :entrypoint))
+           :entrypoint)
+  (:documentation "The core LCM package."))
