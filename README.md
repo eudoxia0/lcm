@@ -43,7 +43,7 @@ You can then remove the `~/common-lisp` directory.
 ```bash
 curl -L -O https://github.com/eudoxia0/lcm/releases/download/v0.0.1/lcm
 chmod +x lcm
-mv lcm .local/bin/lcm
+mv lcm ~/.local/bin/lcm
 ```
 
 # Example Usage
