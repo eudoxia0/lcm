@@ -11,14 +11,14 @@
              :documentation "The command to run when the component is unapplied."))
   :documentation "A component to run a shell command."
 
-  :appliedp (((component file-component))
+  :appliedp (((component command-component))
              (declare (ignore component))
              nil)
 
-  :apply (((component file-component))
+  :apply (((component command-component))
           (with-slots (forward) component
             (uiop:run-program forward :ignore-error-status t)))
 
-  :unapply (((component file-component))
+  :unapply (((component command-component))
             (with-slots (backward) component
               (uiop:run-program backward :ignore-error-status t))))
