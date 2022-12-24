@@ -5,5 +5,8 @@
            :component-path
            :component-contents
            :component-executable
-           :make-file-component)
+           :make-file-component
+           :command-component
+           :component-forward
+           :component-backward)
   (:documentation "Built-in LCM components."))

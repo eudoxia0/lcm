@@ -23,7 +23,8 @@
                   :serial t
                   :components
                   ((:file "package")
-                   (:file "file")))
+                   (:file "file")
+                   (:file "command")))
                  (:file "main"))))
   :description "System configuration manager for infrastructure-as-code in Common Lisp."
   :long-description
