@@ -38,6 +38,14 @@ sudo make install
 
 You can then remove the `~/common-lisp` directory.
 
+# Installation
+
+```bash
+curl -L -O https://github.com/eudoxia0/lcm/releases/download/v0.0.1/lcm
+chmod +x lcm
+mv lcm .local/bin/lcm
+```
+
 # Example Usage
 
 # License
