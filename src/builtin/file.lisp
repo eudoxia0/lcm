@@ -59,10 +59,3 @@
 
   :unapply (((component file-component))
             (delete-file (component-path component))))
-
-(defun make-file-component (&key title source target (executable nil))
-  (make-instance 'file-component
-                 :title title
-                 :path target
-                 :contents (uiop:read-file-string source)
-                 :executable executable))
