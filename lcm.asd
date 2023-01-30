@@ -18,7 +18,6 @@
                  (:file "registry")
                  (:file "cli")
                  (:file "engine")
-                 (:file "macros")
                  (:module "builtin"
                   :serial t
                   :components

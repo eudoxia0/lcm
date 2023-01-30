@@ -21,7 +21,7 @@
                      :socket nil)))
     (setf (attributes pathname) (encode-attributes attrs))))
 
-(defcomponent file-component (component)
+(defclass file-component (component)
   ((path :reader component-path
          :initarg :path
          :type pathname
@@ -35,27 +35,27 @@
                :initform nil
                :type boolean
                :documentation "Whether the resulting file should be executable."))
-  :documentation "A component to create a file."
+  (:documentation "A component to create a file."))
 
-  :appliedp (((component file-component))
-             "Applied when the file exists and its contents are identical to the string."
-             (with-slots (path contents) component
-               (and (probe-file path)
-                    (string= (uiop:read-file-string path) contents))))
+(defmethod component-applied-p ((component file-component))
+  "Applied when the file exists and its contents are identical to the string."
+  (with-slots (path contents) component
+    (and (probe-file path)
+         (string= (uiop:read-file-string path) contents))))
 
-  :apply (((component file-component))
-          (with-slots (path contents executable) component
-            ;; Ensure the parent directories exist.
-            (ensure-directories-exist (uiop:pathname-directory-pathname path))
-            ;; Write the file.
-            (with-open-file (stream path
-                                    :direction :output
-                                    :if-exists :supersede
-                                    :if-does-not-exist :create)
-              (write-string contents stream))
-            ;; chmod+x if needd
-            (when executable
-              (chmod+x path))))
+(defmethod component-apply ((component file-component))
+  (with-slots (path contents executable) component
+    ;; Ensure the parent directories exist.
+    (ensure-directories-exist (uiop:pathname-directory-pathname path))
+    ;; Write the file.
+    (with-open-file (stream path
+                            :direction :output
+                            :if-exists :supersede
+                            :if-does-not-exist :create)
+      (write-string contents stream))
+    ;; chmod+x if needd
+    (when executable
+      (chmod+x path))))
 
-  :unapply (((component file-component))
-            (delete-file (component-path component))))
+(defmethod component-unapply ((component file-component))
+  (delete-file (component-path component)))
