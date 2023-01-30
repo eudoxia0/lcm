@@ -21,4 +21,4 @@
 
 (defmethod component-unapply ((component command-component))
   (with-slots (backward) component
-    (uiop:run-program backward :ignore-error-status t))))
+    (uiop:run-program backward :ignore-error-status t)))
